@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 
 User? user = FirebaseAuth.instance.currentUser;
 
+Future signOut() async{
+  await FirebaseAuth.instance.signOut();
+}
+
 
 Future signUp(BuildContext context,String name,String email, String password, String confirmPassword) async{
   if (password != confirmPassword) {

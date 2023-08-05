@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_final_fields
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 
 import '../firestore/firestore.dart';
+import '../screens/home.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showSignupPage;

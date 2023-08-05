@@ -1,6 +1,10 @@
+
+import 'package:expense_tracker/firestore/firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../auth/login_page.dart';
 import '../screens/add_expense.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -106,8 +110,17 @@ class MyDrawer extends StatelessWidget {
 class DrawerList extends StatelessWidget {
   const DrawerList({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+
+    void logOut() async{
+      await FirebaseAuth.instance.signOut();
+      //ignore: use_build_context_synchronously
+      Navigator.popUntil(context, (route) => route.isFirst);
+      //ignore: use_build_context_synchronously
+      Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => LoginPage(showSignupPage: (){})));
+    }
     return Container(
       height: 500,
       width: double.infinity,
@@ -179,7 +192,31 @@ class DrawerList extends StatelessWidget {
               horizontalTitleGap: 1,
             ),
             ListTile(
-              onTap: ()async {await FirebaseAuth.instance.signOut();},
+              onTap: (){
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('LogOut'),
+                      content: const Text('Do you want to LogOut?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () async{
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () async{
+                            logOut();
+                          },
+                          child: const Text('OK', style: TextStyle(color: Colors.red),),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
               leading: Icon(Icons.logout_rounded, color: Colors.grey[700],),
               title: Text(
                 'Log out',
@@ -196,4 +233,5 @@ class DrawerList extends StatelessWidget {
     );
   }
 }
+
 
