@@ -1,4 +1,4 @@
-name: tracker
+name: expense_tracker
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -30,12 +30,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.18.1
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  intl: ^0.18.1
+  firebase_core: ^2.15.0
+  firebase_auth: ^4.7.2
+  #Validate email
+  email_validator: ^2.1.6
+  cloud_firestore: ^4.8.4
+  vibration: ^1.8.1
+
 
 dev_dependencies:
   flutter_test:
@@ -59,11 +66,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/avatar.jpg
-   - assets/avatar1.jpg
-   - assets/avatar2.png
+    - assets/avatar.jpg
+    - assets/avatar1.jpg
+    - assets/avatar2.png
+    - assets/google.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -77,27 +84,26 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-   - family: IndieFlower
-     fonts:
-       - asset: fonts/IndieFlower-Regular.ttf
-   - family: NotoSans
-     fonts:
-       - asset: fonts/NotoSans-Regular.ttf
-   - family: Roboto
-     fonts:
-       - asset: fonts/Roboto-Regular.ttf
-   - family: Ubuntu
-     fonts:
-       - asset: fonts/Ubuntu-Regular.ttf
-   - family: Josefin
-     fonts:
-       - asset: fonts/JosefinSans-Regular.ttf
-   - family: Poppins
-     fonts:
-       - asset: fonts/Poppins-Medium.ttf
-   - family: Oswald
-     fonts:
-       - asset: fonts/Oswald-Regular.ttf
-  #
+    - family: IndieFlower
+      fonts:
+        - asset: fonts/IndieFlower-Regular.ttf
+    - family: NotoSans
+      fonts:
+        - asset: fonts/NotoSans-Regular.ttf
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+    - family: Ubuntu
+      fonts:
+        - asset: fonts/Ubuntu-Regular.ttf
+    - family: Josefin
+      fonts:
+        - asset: fonts/JosefinSans-Regular.ttf
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Medium.ttf
+    - family: Oswald
+      fonts:
+        - asset: fonts/Oswald-Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
