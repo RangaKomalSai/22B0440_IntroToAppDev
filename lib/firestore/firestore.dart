@@ -3,13 +3,16 @@ import 'package:expense_tracker/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+import '../auth/login_page.dart';
 
 User? user = FirebaseAuth.instance.currentUser;
+String userName = 'Guest';
 
 Future signOut() async{
   await FirebaseAuth.instance.signOut();
 }
-
 
 Future signUp(BuildContext context,String name,String email, String password, String confirmPassword) async{
   if (password != confirmPassword) {
@@ -67,4 +70,38 @@ Future<void> addTransactionToDB(String userId,String amount, String description,
 
   // String transactionId = newDocRef.id;
   // await newDocRef.update({'transactionId': transactionId});
+}
+
+Future<UserCredential> signInWithGoogle(BuildContext context) async {
+
+  try{
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  } on FirebaseAuthException catch (ex){
+    showMySnackBar(context, ex.code.toString());
+    throw '';
+  }
+}
+
+Future<void> emailSignIn(BuildContext context, String email, String password) async{
+  try{
+    final UserCredential userCredential = await signIn(context, email, password);
+    final User user = userCredential.user!;
+    userName = user.displayName ?? 'GUEST';
+  } catch (e){
+    print(e);
+    showMySnackBar(context, 'Error, Please try again!');
+  }
 }

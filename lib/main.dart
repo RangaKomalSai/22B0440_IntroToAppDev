@@ -1,3 +1,4 @@
+import 'package:expense_tracker/theme/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,16 +18,14 @@ Future main() async{
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: AppTheme.lightThemeData,
+      darkTheme: AppTheme.darkThemeData,
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       title: 'Budget Tracker',
-      theme: ThemeData(
-          fontFamily: 'NotoSans',
-          scaffoldBackgroundColor: const Color.fromRGBO(222, 222, 222,1)
-      ),
       home: const StartPage(),
     );
   }

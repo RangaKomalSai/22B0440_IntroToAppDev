@@ -12,8 +12,9 @@ class MyCard extends StatelessWidget {
   final String description;
   final bool transaction;
   final String uniqueId;
+  final int dateAdded;
 
-  const MyCard({super.key, required this.amount, required this.description, required this.transaction, required this.uniqueId});
+  const MyCard({super.key, required this.amount, required this.description, required this.transaction, required this.uniqueId, required this.dateAdded});
 
 
   @override
@@ -94,6 +95,7 @@ void removeCard(index) async{
   String cardKey = cardList[index].uniqueId;
   int newAmount =int.parse(cardList[index].amount);
   cardList[index].transaction ? expensesTotal -= newAmount : expensesTotal += newAmount ;
+  cardList[index].transaction ? income -= newAmount : expense += newAmount;
   cardList.removeAt(index);
   await FirebaseFirestore.instance.collection('users').doc(user!.uid).collection('Transactions').doc(cardKey).delete();
 }
@@ -102,7 +104,8 @@ void addCard(String amount, String description, bool transaction) async{
 
   DateTime currentTime = DateTime.now();
   String uniqueId = currentTime.microsecondsSinceEpoch.toString();
-
-  cardList.add(MyCard(amount: amount, description: description, transaction: transaction, uniqueId: uniqueId));
+  transaction ? expensesTotal += int.parse(amount) : expensesTotal -= int.parse(amount);
+  transaction ? income += int.parse(amount) : expense -= int.parse(amount);
+  cardList.add(MyCard(amount: amount, description: description, transaction: transaction, uniqueId: uniqueId, dateAdded: currentTime.day,));
   addTransactionToDB(user!.uid, amount, description, transaction, uniqueId);
 }

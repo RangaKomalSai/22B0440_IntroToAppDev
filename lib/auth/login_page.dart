@@ -3,9 +3,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:get/get.dart';
 
 import '../firestore/firestore.dart';
 import '../screens/home.dart';
+import 'google_auth.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showSignupPage;
@@ -118,7 +120,6 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: (){
                           final isValid = formKey.currentState!.validate();
                           if(!isValid)return;
-
                           signIn(context, emailController.text.trim(), pswdController.text.trim());
                         },
                         child: Container(
@@ -165,9 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 10,),
-                    const CircleAvatar(
-                      backgroundImage: AssetImage('assets/google.jpg'),
-                    ),
+                    GoogleButton(onPressed: () => googleSignIn(context),isLoading: isGoogleLoading.value,),
                     const SizedBox(height: 20,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -201,3 +200,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+

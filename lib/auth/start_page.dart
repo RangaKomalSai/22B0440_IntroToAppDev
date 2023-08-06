@@ -27,7 +27,7 @@ class StartPage extends StatelessWidget {
                     return const Center(child: CircularProgressIndicator());
                   } else {
                     final userName = nameSnapshot.data ?? ''; // Get the user's name or an empty string if it's not available
-                    return Home(userName: user!.uid,); // Pass the user's name to the HomeScreen widget
+                    return Home(); // Pass the user's name to the HomeScreen widget
                   }
                 },
               );

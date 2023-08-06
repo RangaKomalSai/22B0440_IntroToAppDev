@@ -4,6 +4,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import '../firestore/firestore.dart';
+import 'google_auth.dart';
 
 
 class SignupPage extends StatefulWidget {
@@ -174,7 +175,7 @@ class _SignupPageState extends State<SignupPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: GestureDetector(
-                      onTap:() {signUp(context, nameController.text.trim(),emailController.text.trim(),pswdController.text.trim(),confirmPswdController.text.trim());},
+                      onTap:() async{userName = nameController.text.trim();signUp(context, nameController.text.trim(),emailController.text.trim(),pswdController.text.trim(),confirmPswdController.text.trim());},
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -219,20 +220,7 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
                   const SizedBox(height: 20,),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Continue with ',
-                        style: TextStyle(
-                            fontSize: 18
-                        ),
-                      ),
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/google.jpg'),
-                      ),
-                    ],
-                  ),
+                  GoogleButton(onPressed: () => googleSignIn(context),isLoading: isGoogleLoading.value,),
                   const SizedBox(height: 20,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

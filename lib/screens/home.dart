@@ -10,10 +10,11 @@ import '../widgets/vibration.dart';
 import 'add_expense.dart';
 
 int expensesTotal = 0;
+int income = 0;
+int expense = 0;
 
 class Home extends StatefulWidget {
-  final String userName;
-  const Home({super.key, required this.userName});
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -43,7 +44,7 @@ class _HomeState extends State<Home> {
 
     return SafeArea(
       child: Scaffold(
-        drawer: MyDrawer(userName: user!.uid),
+        drawer: MyDrawer(),
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: const Color.fromRGBO(27, 131, 129, 1),
@@ -53,7 +54,7 @@ class _HomeState extends State<Home> {
               color: Colors.white,
               fontSize: 30.0,
               fontWeight: FontWeight.bold,
-              letterSpacing: 4.0,
+              letterSpacing: 1.0,
               fontFamily: 'Ubuntu',
             ),
           ),
@@ -72,7 +73,7 @@ class _HomeState extends State<Home> {
                 Visibility(
                   visible: introVisible,
                   child: Text(
-                    'Welcome, ${widget.userName}!',
+                    'Welcome, $userName!',
                     style: const TextStyle(
                         fontSize: 30.0,
                         letterSpacing: 4.0,
@@ -80,6 +81,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
+                SizedBox(height: 10,),
                 Container(
                   height: deviceHeight * 0.2,
                   width: deviceWidth,
@@ -200,7 +202,6 @@ class _HomeState extends State<Home> {
                   child: Container(
                       height: deviceHeight * 0.4,
                       child: ListView.builder(
-                        reverse: true,
                         itemCount: cardList.length,
                         itemBuilder: (context, index) {
                           return SingleChildScrollView(
@@ -251,7 +252,7 @@ class _HomeState extends State<Home> {
             });
           },
           elevation: 5,
-          backgroundColor: const Color.fromRGBO(47, 37, 245, 1),
+          backgroundColor: const Color.fromRGBO(15, 152, 148, 1.0),
           child: const Icon(Icons.add),
 
         ),

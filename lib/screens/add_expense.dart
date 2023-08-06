@@ -1,11 +1,12 @@
 import 'package:expense_tracker/widgets/card.dart';
+import 'package:expense_tracker/widgets/line_chart.dart';
 import 'package:expense_tracker/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 import '../firestore/firestore.dart';
 import '../widgets/drop_down.dart';
 import 'home.dart';
-
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 bool? isItIncome;
 
 class AddExpense extends StatefulWidget {
@@ -61,7 +62,7 @@ class _AddExpenseState extends State<AddExpense> {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               elevation: 1.0,
-              backgroundColor: const Color.fromRGBO(47, 37, 245, 1),
+              backgroundColor: const Color.fromRGBO(27, 131, 129, 1),
               centerTitle: true,
               title: Row(
                 children: [
@@ -97,12 +98,21 @@ class _AddExpenseState extends State<AddExpense> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(18, 38, 18, 18),
+                      padding: const EdgeInsets.fromLTRB(18, 14, 18, 18),
+                      child: DropDown(
+                        data: const [
+                          'Income', 'Expense'
+                        ],
+                        hint: 'Transaction Type',
+                        textEditingController: transactionController,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
                       child: MyTextField(
                           controller: amountController,
                           textInputAction: TextInputAction.next,
                           labelText: 'Enter Amount',
-                          autofocus: true,
                           textInputType: TextInputType.phone,
                           prefixIcon: const Icon(
                               Icons.currency_rupee,
@@ -119,16 +129,6 @@ class _AddExpenseState extends State<AddExpense> {
                           textCapitalization: TextCapitalization.sentences,
                           )
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(18, 14, 18, 18),
-                      child: DropDown(
-                        data: const [
-                          'Income', 'Expense'
-                        ],
-                        hint: 'Transaction Type',
-                        textEditingController: transactionController,
-                      ),
-                    ),
                     const SizedBox(height: 20,),
                     ElevatedButton(
                       onPressed: (){
@@ -138,13 +138,13 @@ class _AddExpenseState extends State<AddExpense> {
                           } else if(amountController.text.isEmpty || descriptionController.text.isEmpty || transactionController.text.isEmpty){
                             showAlertDialog(context,'Please enter a value in all the fields.');
                           } else {
+                            calculateBalanceData();
                             // cardList.add(MyCard(amount: amountController.text.trim(), description: descriptionController.text.trim(), transaction: transactionController.text=='Income'));
                             addCard(amountController.text.trim(), descriptionController.text.trim(), transactionController.text=='Income');
-                            transactionController.text == 'Income' ? expensesTotal += int.parse(amountController.text) : expensesTotal -= int.parse(amountController.text);
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Home(userName: user!.uid),
+                                builder: (context) => Home(),
                               ),
                             ).then((value) {
                               Navigator.of(context).popUntil((route) => route.isFirst);
@@ -153,7 +153,7 @@ class _AddExpenseState extends State<AddExpense> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(47, 37, 245, 1),
+                          backgroundColor: const Color.fromRGBO(27, 131, 129, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(21.0), // Rounded corners
                           ),

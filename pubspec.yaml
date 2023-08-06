@@ -30,23 +30,37 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  intl: ^0.18.1
+  intl: ^0.18.0
   firebase_core: ^2.15.0
   firebase_auth: ^4.7.2
   #Validate email
   email_validator: ^2.1.6
   cloud_firestore: ^4.8.4
   vibration: ^1.8.1
+  firebase_ui_auth: ^1.6.2
+  google_sign_in: ^6.1.4
+  get: ^4.6.5
+  flutter_native_splash: ^2.3.1
+  fl_chart: ^0.63.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
+flutter_native_splash:
+  color: "#ffffff"
+  color_dark: "#363538"
+  image: assets/logo.png
+  image_dark: assets/logo.png
+  android_12:
+    image: assets/logo.png
+    icon_background_color: "#ffffff"
+    image_dark: assets/logo.png
+    icon_background_color_dark: "#363538"
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -71,6 +85,8 @@ flutter:
     - assets/avatar1.jpg
     - assets/avatar2.png
     - assets/google.jpg
+    - assets/logo.png
+    - assets/logo_zoom.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,5 +1,8 @@
 
 import 'package:expense_tracker/firestore/firestore.dart';
+import 'package:expense_tracker/screens/home.dart';
+import 'package:expense_tracker/screens/settings_page.dart';
+import 'package:expense_tracker/widgets/line_chart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +11,7 @@ import '../auth/login_page.dart';
 import '../screens/add_expense.dart';
 
 class MyDrawer extends StatelessWidget {
-  final String userName;
-  const MyDrawer({super.key, required this.userName});
+  const MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class MyDrawer extends StatelessWidget {
             Container(
               height: 50,
               width: double.infinity,
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
@@ -60,7 +62,7 @@ class MyDrawer extends StatelessWidget {
                   ),
                   Icon(Icons.currency_rupee_rounded, color: Colors.green,size: 18,),
                   Text(
-                    '20000',
+                    income.toString(),
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -74,7 +76,7 @@ class MyDrawer extends StatelessWidget {
             Container(
               height: 50,
               width: double.infinity,
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
@@ -88,7 +90,7 @@ class MyDrawer extends StatelessWidget {
                   ),
                   Icon(Icons.currency_rupee_rounded, color: Colors.red,size: 18,),
                   Text(
-                    '20000',
+                    expense.toString(),
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -147,9 +149,30 @@ class DrawerList extends StatelessWidget {
               titleAlignment: ListTileTitleAlignment.center,
             ),
             ListTile(
+              onTap:(){
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => ChartPage()),
+                );
+              },
               leading: Icon(Icons.bar_chart_rounded, color: Colors.grey[700],),
               title: Text(
                 'Statistics',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey[700]
+                ),
+              ),
+              horizontalTitleGap: 1,
+            ),
+            ListTile(
+              onTap:(){
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => SettingsPage()),
+                );
+              },
+              leading: Icon(Icons.settings, color: Colors.grey[700],),
+              title: Text(
+                'Settings',
                 style: TextStyle(
                     fontSize: 20,
                     color: Colors.grey[700]
