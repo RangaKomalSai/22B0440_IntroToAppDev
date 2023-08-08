@@ -7,8 +7,8 @@ Welcome to Budget Tracker App! This app helps you manage your finances by tracki
  - Can delete a transaction if added by mistake
  
 ## Screenshots
-![Screenshot](./screenshots/login.jpg)
-![Screenshot](./screenshots/main.jpg)
-![Screenshot](./screenshots/add.jpg)
-![Screenshot](./screenshots/shortcuts.jpg)
-![Screenshot](./screenshots/stats.jpg)
+![Screenshot](./Screenshots/login.jpg)
+![Screenshot](./Screenshots/main.jpg)
+![Screenshot](./Screenshots/add.jpg)
+![Screenshot](./Screenshots/shortcuts.jpg)
+![Screenshot](./Screenshots/stats.jpg)
