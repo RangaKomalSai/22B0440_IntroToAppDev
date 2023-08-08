@@ -12,3 +12,5 @@ Welcome to Budget Tracker App! This app helps you manage your finances by tracki
 ![Screenshot](./Screenshots/add.jpg)
 ![Screenshot](./Screenshots/shortcuts.jpg)
 ![Screenshot](./Screenshots/stats.jpg)
+<img src="./Screenshots/login.jpg" alt="Screenshot" width="300"/>
+
