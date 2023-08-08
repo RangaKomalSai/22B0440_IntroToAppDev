@@ -1,16 +1,14 @@
-# appdev_project
+# Budget Tracker App
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Welcome to Budget Tracker App! This app helps you manage your finances by tracking your income and expenses, enabling you to make informed financial decisions. Keep your budget in check and take control of your financial journey with this user-friendly application.
+## Features
+ - Login to your account and keep track of your transactions.
+ - See the statistics of your income and expenses.
+ - Can delete a transaction if added by mistake
+ 
+## Screenshots
+![Screenshot](./screenshots/login.jpg)
+![Screenshot](./screenshots/main.jpg)
+![Screenshot](./screenshots/add.jpg)
+![Screenshot](./screenshots/shortcuts.jpg)
+![Screenshot](./screenshots/stats.jpg)
